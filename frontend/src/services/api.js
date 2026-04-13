@@ -40,11 +40,9 @@ export const knowledgeBaseAPI = {
 
 export const chatbotAPI = {
   sendMessage: (studentId, message, sessionId) =>
-    apiClient.post(`/chatbot/message?studentId=${studentId}`, { message, sessionId }),
-  getChatHistory: (studentId) => apiClient.get(`/chatbot/history/${studentId}`),
-  getChatSession: (studentId, sessionId) => apiClient.get(`/chatbot/session/${studentId}/${sessionId}`),
-  getEscalatedChats: () => apiClient.get('/chatbot/escalated'),
-  resolveChat: (chatLogId) => apiClient.put(`/chatbot/resolve/${chatLogId}`),
+    apiClient.post(`/chat/send?userId=${studentId}`, { message }),
+  getChatHistory: (studentId) => apiClient.get(`/chat/history/${studentId}`),
+  clearChatHistory: (studentId) => apiClient.delete(`/chat/history/${studentId}`),
 };
 
 export const learningAPI = {

@@ -23,7 +23,13 @@ export default function Login() {
 
     try {
       const response = await authAPI.login({ email, password });
+      console.log('✅ Login response:', response.data);
+      
       const { token, user } = response.data;
+      
+      if (!token || !user) {
+        throw new Error('Invalid response: missing token or user data');
+      }
       
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
@@ -35,11 +41,13 @@ export default function Login() {
     } catch (err) {
       const errorMessage = err.response?.data?.message || err.message || 'Login failed';
       setError(errorMessage);
-      console.error('Login error:', {
+      console.error('❌ Login error details:', {
         status: err.response?.status,
+        statusText: err.response?.statusText,
         data: err.response?.data,
         message: err.message,
-        config: err.config
+        url: err.config?.url,
+        headers: err.config?.headers
       });
     } finally {
       setIsLoading(false);

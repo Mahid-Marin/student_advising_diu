@@ -10,7 +10,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/services")
-@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:3000"})
+@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:3000", "http://localhost:3001"})
 public class ServiceController {
     
     private final GroqService groqService;
